@@ -3,10 +3,15 @@ import React, {useState} from 'react'
 export default function Textform(props) {
   const [text,setText]=useState('Nut here')
   const [copySuccess,setCopySuccess]=useState(false)
-  //capitalise button
+//functions
   const handleUpClick=()=>{
     console.log("upper case was pressed")
     let newText = text.toUpperCase()
+    setText(newText)
+  }
+  const clearScreen=()=>{
+    console.log("clear screen was pressed")
+    let newText=" "
     setText(newText)
   }
   const handleOnChange=(event)=>{
@@ -37,8 +42,10 @@ export default function Textform(props) {
   <textarea className="form-control"value={text} onChange={handleOnChange} id="myBox" rows="24"></textarea>
   <button className="btn btn-primary my-2" onClick={handleUpClick}>Capitalise</button>
   <button className="btn btn-primary mx-2" onClick={handleLowClick}>Lowercase</button>
-  <button className="btn btn-primary" onClick={copytoclipboard}>Copy</button>
-  {copySuccess && <span style={{marginLeft :'10px',color:'green'}}>Copied!</span>}
+  <button className="btn btn-primary " onClick={copytoclipboard}>Copy</button>
+  {/* displays the "copied!" text */}
+  {copySuccess && <span style={{marginLeft :'10px',color:'green'}}>Copied!</span>} 
+  <button className="btn btn-primary mx-2"onClick={clearScreen}>Clear</button>
     </div>
  </div>
  <div className="container">
