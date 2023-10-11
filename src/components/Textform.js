@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 // import PropTypes from 'prop-types'
 export default function Textform(props) {
   const [text,setText]=useState('Nut here')
+  const [copySuccess,setCopySuccess]=useState(false)
   //capitalise button
   const handleUpClick=()=>{
     console.log("upper case was pressed")
@@ -17,6 +18,16 @@ export default function Textform(props) {
     let newText = text.toLowerCase()
     setText(newText)
   }
+  const copytoclipboard=()=>{
+    console.log("copy was pressed")
+    const textToCopy = text
+    navigator.clipboard.writeText(textToCopy)
+    .then(()=>{
+      setCopySuccess(true);
+      setTimeout(()=>setCopySuccess(false),1500)
+    })
+      .catch(err => console.error('could not copy text: ',err))
+  }
 
   return (
     <>
@@ -26,6 +37,8 @@ export default function Textform(props) {
   <textarea className="form-control"value={text} onChange={handleOnChange} id="myBox" rows="24"></textarea>
   <button className="btn btn-primary my-2" onClick={handleUpClick}>Capitalise</button>
   <button className="btn btn-primary mx-2" onClick={handleLowClick}>Lowercase</button>
+  <button className="btn btn-primary" onClick={copytoclipboard}>Copy</button>
+  {copySuccess && <span style={{marginLeft :'10px',color:'green'}}>Copied!</span>}
     </div>
  </div>
  <div className="container">
